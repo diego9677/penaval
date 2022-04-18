@@ -1,0 +1,55 @@
+{% extends 'core/panel.html' %}
+
+{% block title %}Productos{% endblock  %}
+
+{% block content-panel %}
+    <div class="container py-4">
+        <div class="d-flex flex-row justify-content-between mb-4">
+            <a href="{% url 'producto-create' %}" class="btn btn-primary">
+                Nuevo
+            </a>
+            <form class="d-flex flex-row gap-2" action="." method="get">
+                <input type="text" name="word" class="form-control flex-fill" value="{{ request.GET.word }}" placeholder="Buscar productos">
+                <button class="btn btn-success" type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="table-section border">
+            <table class="table table-borderless table-sm table-fixed">
+                <thead>
+                  <tr class="text-center border-bottom">
+                    <th scope="col">#</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Ubicación</th>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Medidas</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio (Bs)</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% if object_list %}
+                        {% for producto in object_list %}
+                            <tr class="text-center">
+                                <td>{{ producto.id }}</th>
+                                <td>{{ producto.marca.nombre }}</th>
+                                <td>{{ producto.lugar.nombre }}</th>
+                                <td>{{ producto.codigo }}</th>    
+                                <td>{{ producto.medidas }}</th>
+                                <td>{{ producto.cantidad_disponible }}</th>
+                                <td>{{ producto.precio_unitario }}</th>
+                                <td>
+                                    <a href="{% url 'producto-update' producto.pk %}" class="btn btn-success btn-sm">Editar</a>
+                                </th>
+                            </tr>
+                        {% endfor %}    
+                    {% else %}
+                        <tr class="text-center">
+                            <td colspan="7">Sin datos disponibles</th>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock  %}

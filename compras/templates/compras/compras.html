@@ -1,0 +1,51 @@
+{% extends 'core/panel.html' %}
+
+{% block title %}Compras{% endblock  %}
+
+{% block content-panel %}
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-6">
+                <div class="table-section border">
+                    <table class="table table-borderless table-sm table-fixed">
+                        <thead>
+                          <tr class="text-center border-bottom">
+                            <th scope="col">#</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Ubicación</th>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Medidas</th>
+                            <th scope="col">Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% if productos %}
+                                {% for producto in productos %}
+                                    <tr class="text-center">
+                                        <td>{{ producto.id }}</th>
+                                        <td>{{ producto.marca.nombre }}</th>
+                                        <td>{{ producto.lugar.nombre }}</th>
+                                        <td>{{ producto.codigo }}</th>
+                                        <td>{{ producto.medidas }}</th>
+                                        <td>
+                                            <a href="{% url 'compras-add-producto' producto.pk %}" class="btn btn-info btn-sm text-white">+</a>
+                                        </th>
+                                    </tr>
+                                {% endfor %}    
+                            {% else %}
+                                <tr class="text-center">
+                                    <td colspan="7">Sin datos disponibles</th>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="border">
+                    {% include 'compras/carrito.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock  %}

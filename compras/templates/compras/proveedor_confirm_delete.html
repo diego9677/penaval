@@ -1,0 +1,18 @@
+{% extends 'core/panel.html' %}
+
+{% block title %}Borrar proveedor {{ object.id }} {% endblock  %}
+
+ {% block content-panel %}
+    <div class="py-2 px-4 row">
+        <form class="col-5 mt-5" method="post">{% csrf_token %}
+            <p class="fs-4">¿Esta seguro que desea eliminar el proveedor "{{ object }}"?</p>
+            {{ form }}
+            <div class="d-flex flex-row gap-2">
+                <a href="{% url 'proveedor-list' %}" class="btn btn-secondary flex-fill">Cancelar</a>
+                <button type="submit" class="btn btn-danger flex-fill">
+                    Si, Eliminar
+                </button>
+            </div>
+        </form>
+    </div>
+ {% endblock %}

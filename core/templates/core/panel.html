@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Panel{% endblock  %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'core/index.css' %}">
+{% endblock  %}
+
+{% block content %}
+    {% comment %} sidebar {% endcomment %}
+    <main>
+        {% include 'core/includes/sidebar.html' %}
+
+        <div class="container-fluid">
+            {% block content-panel %}
+            {% endblock  %}
+        </div>
+    </main>
+{% endblock  %}
+
+{% block js-extra %}{% endblock js-extra %}
