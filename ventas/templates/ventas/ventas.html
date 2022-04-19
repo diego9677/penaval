@@ -9,8 +9,13 @@
         <div class="row">
             <div class="col-6">
                 <h4>Lista de productos</h4>
-                <form class="d-flex flex-row justify-content-end gap-2 mb-3" action="." method="get">
-                    <input type="text" name="word" placeholder="Buscar" class="form-control" value="{{ request.GET.word }}">
+                <form class="d-flex flex-row justify-content-end gap-2 mb-3" action="." method="GET">
+                    <input
+                            type="text"
+                            name="word"
+                            placeholder="Buscar"
+                            class="form-control"
+                            value="{{ request.GET.word }}"/>
                     <button type="submit" class="btn btn-primary">Buscar</button>
                 </form>
                 <div class="table-section border">
@@ -28,30 +33,33 @@
                         </tr>
                         </thead>
                         <tbody>
-                            {% if productos %}
-                                {% for producto in productos %}
-                                    <tr class="text-center">
-                                        <td>{{ producto.codigo }}</td>
-                                        <td>{{ producto.marca.nombre }}</td>
-                                        <td>{{ producto.lugar.nombre }}</td>
-                                        <td>{{ producto.cantidad_disponible }}</td>
-                                        <td>{{ producto.medidas }}</td>
-                                        <td>{{ producto.precio_unitario }}</td>
-                                        <td>
-                                            <form class="d-flex gap-2 justify-content-center" action="{% url 'ventas-add-producto' producto.pk %}" method="post">{% csrf_token %}
-                                                <div class="col-6">
-                                                    {{ form_producto.cantidad|addclss:"form-control form-control-sm" }}
-                                                </div>
-                                                <button class="col-2 btn btn-success btn-sm text-white">+</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                {% endfor %}    
-                            {% else %}
+                        {% if productos %}
+                            {% for producto in productos %}
                                 <tr class="text-center">
-                                    <td colspan="7">Sin datos disponibles</th>
+                                    <td>{{ producto.codigo }}</td>
+                                    <td>{{ producto.marca.nombre }}</td>
+                                    <td>{{ producto.lugar.nombre }}</td>
+                                    <td>{{ producto.cantidad_disponible }}</td>
+                                    <td>{{ producto.medidas }}</td>
+                                    <td>{{ producto.precio_unitario }}</td>
+                                    <td>
+                                        <form class="d-flex gap-2 justify-content-center"
+                                              action="{% url 'ventas-add-producto' producto.pk %}"
+                                              method="post">{% csrf_token %}
+                                            <div class="col-6">
+                                                {{ form_producto.cantidad|addclss:"form-control form-control-sm" }}
+                                            </div>
+                                            <button class="col-2 btn btn-success btn-sm text-white">+</button>
+                                        </form>
+                                    </td>
                                 </tr>
-                            {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <tr class="text-center">
+                                <td colspan="7">Sin datos disponibles
+                                </th>
+                            </tr>
+                        {% endif %}
                         </tbody>
                     </table>
                 </div>
@@ -63,4 +71,4 @@
             </div>
         </div>
     </div>
-{% endblock  %}
+{% endblock %}

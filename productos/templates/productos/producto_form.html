@@ -1,7 +1,7 @@
 {% extends 'core/panel.html' %}
 {% load formclss %}
 
-{% block title %}{% if object %}Editar{% else %}Crear{% endif %} producto{% endblock  %}
+{% block title %}{% if object %}Editar{% else %}Crear{% endif %} producto{% endblock %}
 
 {% block content-panel %}
     <div class="row py-2 px-4">
@@ -10,7 +10,7 @@
                 <div class="card-title">
                     <h3>{% if object %}Editar{% else %}Crear{% endif %} Producto</h3>
                 </div>
-                <form action="." method="post">
+                <form action="." method="POST">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="id_codigo" class="form-label">{{ form.codigo.label }}</label>
@@ -30,7 +30,8 @@
                     </div>
                     <div class="d-flex flex-row gap-2">
                         {% if object %}
-                            <a href="{% url 'producto-delete' object.id %}" class="btn flex-fill btn-danger">Eliminar</a>
+                            <a href="{% url 'producto-delete' object.id %}"
+                               class="btn flex-fill btn-danger">Eliminar</a>
                         {% endif %}
                         <a href="{% url 'producto-list' %}" class="btn flex-fill btn-secondary">Cancelar</a>
                         <button type="submit" class="btn flex-fill btn-primary">Guardar</button>
@@ -39,4 +40,4 @@
             </div>
         </div>
     </div>
-{% endblock  %}
+{% endblock %}

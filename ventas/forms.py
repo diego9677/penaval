@@ -13,12 +13,25 @@ class ProductoSelectForm(forms.Form):
     )
 
 
-class ClienteForm(forms.ModelForm):
-    class Meta:
-        model = Cliente
-        fields = ['nit', 'nombres', 'apellidos']
-        widgets = {
-            'nit': forms.TextInput(attrs={'placeholder': 'Nit'}),
-            'nombres': forms.TextInput(attrs={'placeholder': 'Nombres'}),
-            'apellidos': forms.TextInput(attrs={'placeholder': 'Apellidos'})
-        }
+class ClienteForm(forms.Form):
+    nit = forms.CharField(
+        max_length=20,
+        label='Nit',
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Nit'}
+        )
+    )
+    nombres = forms.CharField(
+        max_length=255,
+        label='Nombres',
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Nombres'}
+        )
+    )
+    apellidos = forms.CharField(
+        max_length=255,
+        label='Apellidos',
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Apellidos'}
+        )
+    )

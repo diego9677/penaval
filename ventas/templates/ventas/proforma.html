@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Proforma</title>
+</head>
+<body>
+<div class="container mt-lg-5">
+    <h3 class="text-center">Proforma</h3>
+    <div class="d-flex flex-column gap-2">
+        <div>
+            <h4>PeñaVal Rodamientos</h4>
+        </div>
+        <div class="d-flex flex-row gap-2">
+            Nro Proforma: {{ proforma.pk }}
+        </div>
+        <div class="d-flex flex-row gap-2">
+            Cliente: {{ proforma.cliente.nombres }} {{ proforma.cliente.apellidos }}
+        </div>
+        <div class="d-flex flex-row gap-2">
+            Fecha Emisión: {{ proforma.fecha_emision }}
+        </div>
+    </div>
+    <table class="table table-bordered table-sm table-fixed">
+        <thead>
+        <tr>
+            <th colspan="6" class="text-center bg-light text-dark">Detalle</th>
+        </tr>
+        <tr class="text-center">
+            <th class="bg-light text-dark">Codigo</th>
+            <th class="bg-light text-dark">Marca</th>
+            <th class="bg-light text-dark">Medidas</th>
+            <th class="bg-light text-dark">Cantidad</th>
+            <th class="bg-light text-dark">Precio Unitario</th>
+            <th class="bg-light text-dark">Subtotal</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for detalle_proforma in proforma.detalle_proforma.all %}
+            <tr class="text-center">
+                <td class="p-2">{{ detalle_proforma.producto.codigo }}</td>
+                <td class="p-2">{{ detalle_proforma.producto.marca }}</td>
+                <td class="p-2">{{ detalle_proforma.producto.medidas }}</td>
+                <td class="p-2">{{ detalle_proforma.cantidad }}</td>
+                <td class="p-2">{{ detalle_proforma.precio_unitario }} Bs.</td>
+                <td class="p-2">{{ detalle_proforma.subtotal }} Bs.</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <th scope="row" class="text-center bg-light text-dark">Total:</th>
+            <td colspan="4" class="bg-light text-dark"></td>
+            <td class="text-center bg-light text-dark">{{ total }} Bs.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

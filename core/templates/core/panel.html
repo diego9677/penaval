@@ -1,11 +1,11 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block title %}Panel{% endblock  %}
+{% block title %}Panel{% endblock %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'core/index.css' %}">
-{% endblock  %}
+{% endblock %}
 
 {% block content %}
     {% comment %} sidebar {% endcomment %}
@@ -14,9 +14,9 @@
 
         <div class="container-fluid">
             {% block content-panel %}
-            {% endblock  %}
+            {% endblock %}
         </div>
     </main>
-{% endblock  %}
+{% endblock %}
 
 {% block js-extra %}{% endblock js-extra %}

@@ -4,15 +4,15 @@ from .views import (
     agregar_producto,
     eliminar_producto,
     limpiar_carrito,
-    guardar_compra
+    guardar_venta_or_proforma,
+    ProformaPdfView
 )
 
 urlpatterns = [
-    path("agregar/producto/<int:pk>/",
-         agregar_producto, name="ventas-add-producto"),
-    path("eliminar/producto/<int:pk>/",
-         eliminar_producto, name="ventas-del-producto"),
-    path("limpiar/carrito/", limpiar_carrito, name="ventas-clean"),
-    path("guardar/venta/", guardar_compra, name="ventas-save"),
-    path('', ventas, name='ventas')
+    path('agregar/producto/<int:pk>/', agregar_producto, name='ventas-add-producto'),
+    path('eliminar/producto/<int:pk>/', eliminar_producto, name='ventas-del-producto'),
+    path('ver/proforma/<int:pk>/', ProformaPdfView.as_view(), name='ver-proforma'),
+    path('limpiar/carrito/', limpiar_carrito, name='ventas-clean'),
+    path('guardar/venta/', guardar_venta_or_proforma, name='ventas-or-proforma-save'),
+    path('', ventas, name='ventas'),
 ]

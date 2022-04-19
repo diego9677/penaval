@@ -1,6 +1,6 @@
 {% extends 'core/panel.html' %}
 
-{% block title %}Proveedores{% endblock  %}
+{% block title %}Proveedores{% endblock %}
 
 {% block content-panel %}
     <div class="py-4">
@@ -8,40 +8,41 @@
             <a href="{% url 'proveedor-create' %}" class="btn btn-primary">
                 Nuevo
             </a>
-            <form class="d-flex flex-row gap-2" action="." method="get">
-                <input type="text" name="word" class="form-control flex-fill" value="{{ request.GET.word }}" placeholder="Buscar proveedores">
+            <form class="d-flex flex-row gap-2" action="." method="GET">
+                <input type="text" name="word" class="form-control flex-fill" value="{{ request.GET.word }}"
+                       placeholder="Buscar proveedores">
                 <button class="btn btn-success" type="submit">Buscar</button>
             </form>
         </div>
         <div class="table-section border">
             <table class="table table-borderless table-sm table-fixed">
                 <thead>
-                  <tr class="text-center border-bottom">
+                <tr class="text-center border-bottom">
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Dirección</th>
                     <th scope="col">Acciones</th>
-                  </tr>
+                </tr>
                 </thead>
                 <tbody>
-                    {% if object_list %}
-                        {% for proveedor in object_list %}
-                            <tr class="text-center">
-                                <td>{{ proveedor.id }}</th>
-                                <td>{{ proveedor.nombre }}</th>
-                                <td>{{ proveedor.direccion }}</th>
-                                <td>
-                                    <a href="{% url 'proveedor-update' proveedor.pk %}" class="btn btn-success btn-sm">Editar</a>
-                                </th>
-                            </tr>
-                        {% endfor %}    
-                    {% else %}
+                {% if object_list %}
+                    {% for proveedor in object_list %}
                         <tr class="text-center">
-                            <td colspan="7">Sin datos disponibles</th>
+                            <td>{{ proveedor.id }}</td>
+                            <td>{{ proveedor.nombre }}</td>
+                            <td>{{ proveedor.direccion }}</td>
+                            <td>
+                                <a href="{% url 'proveedor-update' proveedor.pk %}" class="btn btn-success btn-sm">Editar</a>
+                            </td>
                         </tr>
-                    {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <tr class="text-center">
+                        <td colspan="7">Sin datos disponibles</td>
+                    </tr>
+                {% endif %}
                 </tbody>
             </table>
         </div>
     </div>
-{% endblock  %}
+{% endblock %}

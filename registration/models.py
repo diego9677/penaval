@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # class Persona(models.Model):
 #     ci = models.CharField(max_length=20, unique=True, verbose_name='CI')
 #     nombres = models.CharField(max_length=255, verbose_name='Nombres')
