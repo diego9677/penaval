@@ -18,7 +18,7 @@ main {
 }
 
 .table-section-modal {
-    max-height: 500px;
+    max-height: calc(100vh - 150px);
     overflow-y: auto;
     scroll-snap-type: y mandatory;
 }
