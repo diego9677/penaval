@@ -4,14 +4,15 @@ from .models import Proveedor, Compra, DetalleCompra
 
 @admin.register(Proveedor)
 class ProveedorAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('pk', 'nombre', 'direccion')
 
 
 @admin.register(Compra)
 class CompraAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('pk', 'usuario', 'proveedor', 'fecha_emision')
 
 
 @admin.register(DetalleCompra)
 class DetalleCompraAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('pk', 'producto', 'cantidad',
+                    'precio_unitario_compra', 'precio_unitario_venta')

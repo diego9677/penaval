@@ -1,11 +1,15 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Producto
 from .forms import ProductoForm
 
 
-class ProductoListView(ListView):
+class ProductoListView(LoginRequiredMixin, ListView):
+    # login required mixin
+    login_url = reverse_lazy('login')
+    # list view
     model = Producto
 
     def get_queryset(self):
@@ -16,18 +20,27 @@ class ProductoListView(ListView):
         return productos
 
 
-class ProductoCreateView(CreateView):
+class ProductoCreateView(LoginRequiredMixin, CreateView):
+    # login required mixin
+    login_url = reverse_lazy('login')
+    # Create View section
     model = Producto
     form_class = ProductoForm
     success_url = reverse_lazy('producto-list')
 
 
-class ProductoUpdateView(UpdateView):
+class ProductoUpdateView(LoginRequiredMixin, UpdateView):
+    # login required mixin
+    login_url = reverse_lazy('login')
+    # view saection
     model = Producto
     form_class = ProductoForm
     success_url = reverse_lazy('producto-list')
 
 
-class ProductoDeleteView(DeleteView):
+class ProductoDeleteView(LoginRequiredMixin, DeleteView):
+    # login required mixin
+    login_url = reverse_lazy('login')
+    # view section
     model = Producto
     success_url = reverse_lazy('producto-list')

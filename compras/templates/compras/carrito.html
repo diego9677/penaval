@@ -1,43 +1,50 @@
+{% load formclss %}
+
 <div class="table-section">
-    <table class="table table-borderless table-sm table-fixed">
-        <thead>
-            <tr>
-                <th colspan="4" class="text-center">Carrito</th>
-            </tr>
-          <tr class="text-center border-bottom">
-            <th scope="col">Codigo</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col">Precio</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-            {% if request.session.carrito.items %}
-                {% for key, value in request.session.carrito.items %}
+    <form action="{% url 'compras-save' %}" method="post">{% csrf_token %}
+        <h4 class="mx-2 mt-2">Registrar Compra</h4>
+        <div class="p-2 mb-3">
+            {{ form_compra.proveedor|addclss:"form-control form-control-sm" }}
+        </div>
+        <table class="table table-borderless table-sm table-fixed">
+            <thead>
+              <tr class="text-center border-bottom">
+                <th scope="col">Codigo</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio Compra</th>
+                <th scope="col">Precio Venta</th>
+                <th scope="col">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% if request.session.carrito_compra.items %}
+                    {% for key, value in request.session.carrito_compra.items %}
+                        <tr class="text-center">
+                            <td>{{ value.codigo }}</td>
+                            <td>{{ value.cantidad }}</td>
+                            <td>{{ value.precio_compra }}</td>
+                            <td>{{ value.precio_venta }}</td>
+                            <td>{{ value.acumulado }} Bs</td>
+                            <td>
+                                <a href="{% url 'compras-del-producto' value.producto_id %}" class="btn btn-danger btn-sm text-white">X</a>
+                            </td>
+                        </tr>
+                    {% endfor %}    
+                {% else %}
                     <tr class="text-center">
-                        <td>{{ value.codigo }}</th>
-                        <td>{{ value.cantidad }}</th>
-                        <td>{{ value.acumulado }} Bs</th>
-                        <td>
-                            <a href="{% url 'compras-del-producto' value.producto_id %}" class="btn btn-danger btn-sm text-white">X</a>
-                        </th>
+                        <td colspan="6">Sin productos</td>
                     </tr>
-                {% endfor %}    
-            {% else %}
-                <tr class="text-center">
-                    <td colspan="3">Sin productos</th>
+                {% endif %}
+                <tr class="border-top">
+                    <th scope="row" class="text-center">Total:</th>
+                    <td colspan="3"></td>
+                    <td class="text-center">{{ total_carrito_compra }} Bs</td>
                 </tr>
-            {% endif %}
-            <tr class="border-top">
-                <th scope="row" class="text-center">Total:</th>
-                <td></td>
-                <td class="text-center">{{ total_carrito }} Bs</td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="d-flex flex-row gap-2 p-2 border-top">
-        <a href="{% url 'compras-clean' %}" class="btn btn-danger btn-sm flex-fill">Limpiar</a>
-        <a href="#" class="btn btn-primary btn-sm flex-fill">Comprar</a>
-    </div>
+            </tbody>
+        </table>
+        <div class="d-flex flex-row gap-2 p-2 border-top">
+            <a href="{% url 'compras-clean' %}" class="btn btn-danger btn-sm flex-fill">Limpiar</a>
+            <button type="submit" class="btn btn-primary btn-sm flex-fill">Registrar</button>
+        </div>
+    </form>
 </div>

@@ -2,9 +2,9 @@ from django.urls import path
 from .views import (
     compras,
     agregar_producto,
-    restar_producto,
     eliminar_producto,
     limpiar_carrito,
+    guardar_compra,
     ProveedorListView,
     ProveedorCreateView,
     ProveedorUpdateView,
@@ -21,10 +21,9 @@ urlpatterns = [
          ProveedorDeleteView.as_view(), name='proveedor-delete'),
     path('agregar/producto/<int:pk>', agregar_producto,
          name='compras-add-producto'),
-    path('restar/producto/<int:pk>', restar_producto,
-         name='compras-sub-producto'),
     path('eliminar/producto/<int:pk>',
          eliminar_producto, name='compras-del-producto'),
     path('limpiar/carrito/', limpiar_carrito, name='compras-clean'),
+    path('guardar/compra/', guardar_compra, name='compras-save'),
     path('', compras, name='compras')
 ]

@@ -1,0 +1,65 @@
+{% load formclss %}
+
+<div class="table-section">
+    <form action="{% url 'ventas-save' %}" method="post">{% csrf_token %}
+        <h4 class="px-4 mt-2">Proforma</h4>
+        <div class="px-4 mb-3">
+            <h6>Cliente:</h6>
+            <div class="d-flex flex-row gap-2">
+                <div class="flex-fill">
+                    {{ form_cliente.nit|addclss:"form-control form-control-sm" }}
+                </div>
+                <div class="flex-fill">
+                    {{ form_cliente.nombres|addclss:"form-control form-control-sm" }}
+                </div>
+                <div class="flex-fill">
+                    {{ form_cliente.apellidos|addclss:"form-control form-control-sm" }}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <table class="table table-borderless table-sm table-fixed">
+            <thead>
+              <tr class="text-center border-bottom">
+                <th scope="col">Codigo</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Medidas</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% if request.session.carrito_venta.items %}
+                    {% for key, value in request.session.carrito_venta.items %}
+                        <tr class="text-center">
+                            <td>{{ value.codigo }}</td>
+                            <td>{{ value.marca }}</td>
+                            <td>{{ value.medidas }}</td>
+                            <td>{{ value.cantidad }}</td>
+                            <td>{{ value.precio }}</td>
+                            <td>{{ value.acumulado }} Bs</td>
+                            <td>
+                                <a href="{% url 'ventas-del-producto' value.producto_id %}" class="btn btn-danger btn-sm text-white">X</a>
+                            </td>
+                        </tr>
+                    {% endfor %}    
+                {% else %}
+                    <tr class="text-center">
+                        <td colspan="6">Sin productos</td>
+                    </tr>
+                {% endif %}
+                <tr class="border-top">
+                    <th scope="row" class="text-center">Total:</th>
+                    <td colspan="4"></td>
+                    <td class="text-center">{{ total_carrito_venta }} Bs</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex flex-row gap-2 p-2 border-top">
+            <a href="{% url 'ventas-clean' %}" class="btn btn-danger btn-sm flex-fill">Limpiar</a>
+            <button type="button" class="btn btn-success btn-sm flex-fill">Ver Proforma</button>
+            <button type="submit" class="btn btn-primary btn-sm flex-fill">Registrar</button>
+        </div>
+    </form>
+</div>
