@@ -21,24 +21,48 @@
         <table class="table table-borderless table-sm table-fixed">
             <thead>
             <tr class="text-center border-bottom">
-                <th scope="col">Codigo</th>
-                <th scope="col">Marca</th>
-                <th scope="col">Medidas</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Subtotal</th>
+                <th scope="col">
+                    <small>Codigo</small>
+                </th>
+                <th scope="col">
+                    <small>Marca</small>
+                </th>
+                <th scope="col">
+                    <small>Medidas</small>
+                </th>
+                <th scope="col">
+                    <small>Medidas</small>
+                </th>
+                <th scope="col">
+                    <small>Medidas</small>
+                </th>
+                <th scope="col">
+                    <small>Subtotal</small>
+                </th>
             </tr>
             </thead>
             <tbody>
             {% if request.session.carrito_venta.items %}
                 {% for key, value in request.session.carrito_venta.items %}
                     <tr class="text-center">
-                        <td>{{ value.codigo }}</td>
-                        <td>{{ value.marca }}</td>
-                        <td>{{ value.medidas }}</td>
-                        <td>{{ value.cantidad }}</td>
-                        <td>{{ value.precio }}</td>
-                        <td>{{ value.acumulado }} Bs</td>
+                        <td style="max-width: 200px;">
+                            <small>{{ value.codigo }}</small>
+                        </td>
+                        <td>
+                            <small>{{ value.marca }}</small>
+                        </td>
+                        <td>
+                            <small>{{ value.medidas }}</small>
+                        </td>
+                        <td>
+                            <small>{{ value.cantidad }}</small>
+                        </td>
+                        <td>
+                            <small>{{ value.precio }}</small>
+                        </td>
+                        <td>
+                            <small>{{ value.acumulado }} Bs</small>
+                        </td>
                         <td>
                             <a href="{% url 'ventas-del-producto' value.producto_id %}"
                                class="btn btn-danger btn-sm text-white">X</a>
@@ -51,9 +75,13 @@
                 </tr>
             {% endif %}
             <tr class="border-top">
-                <th scope="row" class="text-center">Total:</th>
+                <th scope="row" class="text-center">
+                    <small>Total:</small>
+                </th>
                 <td colspan="4"></td>
-                <td class="text-center">{{ total_carrito_venta }} Bs</td>
+                <td class="text-center">
+                    <small>{{ total_carrito_venta }} Bs</small>
+                </td>
             </tr>
             </tbody>
         </table>

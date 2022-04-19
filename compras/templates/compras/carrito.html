@@ -9,25 +9,45 @@
         <table class="table table-borderless table-sm table-fixed">
             <thead>
             <tr class="text-center border-bottom">
-                <th scope="col">Codigo</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Precio Compra</th>
-                <th scope="col">Precio Venta</th>
-                <th scope="col">Subtotal</th>
+                <th scope="col">
+                    <small>Codigo</small>
+                </th>
+                <th scope="col">
+                    <small>Cantidad</small>
+                </th>
+                <th scope="col">
+                    <small>Precio Compra</small>
+                </th>
+                <th scope="col">
+                    <small>Precio Venta</small>
+                </th>
+                <th scope="col">
+                    <small>Subtotal</small>
+                </th>
             </tr>
             </thead>
             <tbody>
             {% if request.session.carrito_compra.items %}
                 {% for key, value in request.session.carrito_compra.items %}
                     <tr class="text-center">
-                        <td>{{ value.codigo }}</td>
-                        <td>{{ value.cantidad }}</td>
-                        <td>{{ value.precio_compra }}</td>
-                        <td>{{ value.precio_venta }}</td>
-                        <td>{{ value.acumulado }} Bs</td>
+                        <td style="max-width: 200px;">
+                            <small>{{ value.codigo }}</small>
+                        </td>
+                        <td>
+                            <small>{{ value.cantidad }}</small>
+                        </td>
+                        <td>
+                            <small>{{ value.precio_compra }}</small>
+                        </td>
+                        <td>
+                            <small>{{ value.precio_venta }}</small>
+                        </td>
+                        <td>
+                            <small>{{ value.acumulado }} Bs</small>
+                        </td>
                         <td>
                             <a href="{% url 'compras-del-producto' value.producto_id %}"
-                               class="btn btn-danger btn-sm text-white">X</a>
+                               class="btn btn-danger btn-sm text-white text-center">x</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -37,9 +57,13 @@
                 </tr>
             {% endif %}
             <tr class="border-top">
-                <th scope="row" class="text-center">Total:</th>
+                <th scope="row" class="text-center">
+                    <small>Total:</small>
+                </th>
                 <td colspan="3"></td>
-                <td class="text-center">{{ total_carrito_compra }} Bs</td>
+                <td class="text-center">
+                    <small>{{ total_carrito_compra }} Bs</small>
+                </td>
             </tr>
             </tbody>
         </table>

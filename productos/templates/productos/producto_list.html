@@ -10,12 +10,12 @@
             </a>
             <form class="d-flex flex-row gap-2" action="." method="GET">
                 <input type="text" name="word" class="form-control flex-fill" value="{{ request.GET.word }}"
-                       placeholder="Buscar productos">
+                       placeholder="Buscar productos" />
                 <button class="btn btn-success" type="submit">Buscar</button>
             </form>
         </div>
         <div class="table-section border">
-            <table class="table table-borderless table-sm table-fixed">
+            <table class="table table-bordered table-sm table-fixed">
                 <thead>
                 <tr class="text-center border-bottom">
                     <th scope="col">#</th>
@@ -32,30 +32,23 @@
                 {% if object_list %}
                     {% for producto in object_list %}
                         <tr class="text-center">
-                            <td>
-                            {{ producto.id }}</th>
-                            <td>
-                            {{ producto.marca.nombre }}</th>
-                            <td>
-                            {{ producto.lugar.nombre }}</th>
-                            <td>
-                            {{ producto.codigo }}</th>
-                            <td>
-                            {{ producto.medidas }}</th>
-                            <td>
-                            {{ producto.cantidad_disponible }}</th>
-                            <td>
-                            {{ producto.precio_unitario }}</th>
+                            <td>{{ producto.id }}</td>
+                            <td>{{ producto.marca.nombre }}</td>
+                            <td>{{ producto.lugar.nombre }}</td>
+                            <td>{{ producto.codigo }}</td>
+                            <td>{{ producto.medidas }}</td>
+                            <td>{{ producto.cantidad_disponible }}</td>
+                            <td>{{ producto.precio_unitario }}</td>
                             <td>
                                 <a href="{% url 'producto-update' producto.pk %}"
                                    class="btn btn-success btn-sm">Editar</a>
-                            </th>
+                            </td>
                         </tr>
                     {% endfor %}
                 {% else %}
                     <tr class="text-center">
                         <td colspan="7">Sin datos disponibles
-                        </th>
+                        </td>
                     </tr>
                 {% endif %}
                 </tbody>

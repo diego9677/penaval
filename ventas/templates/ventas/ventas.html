@@ -7,7 +7,7 @@
 {% block content-panel %}
     <div class="py-4">
         <div class="row">
-            <div class="col-6">
+            <div class="col-7">
                 <h4>Lista de productos</h4>
                 <form class="d-flex flex-row justify-content-end gap-2 mb-3" action="." method="GET">
                     <input
@@ -18,8 +18,8 @@
                             value="{{ request.GET.word }}"/>
                     <button type="submit" class="btn btn-primary">Buscar</button>
                 </form>
-                <div class="table-section border">
-                    <table class="table table-borderless table-sm table-fixed">
+                <div class="table-section">
+                    <table class="table table-bordered table-sm table-fixed">
                         <thead>
                         <tr class="text-center border-bottom">
                             <th scope="col">Codigo</th>
@@ -28,21 +28,32 @@
                             <th scope="col">Stock</th>
                             <th scope="col">Medidas</th>
                             <th scope="col">Precio (Bs)</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
+                            <th scope="col">Cantidad</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% if productos %}
                             {% for producto in productos %}
                                 <tr class="text-center">
-                                    <td>{{ producto.codigo }}</td>
-                                    <td>{{ producto.marca.nombre }}</td>
-                                    <td>{{ producto.lugar.nombre }}</td>
-                                    <td>{{ producto.cantidad_disponible }}</td>
-                                    <td>{{ producto.medidas }}</td>
-                                    <td>{{ producto.precio_unitario }}</td>
+                                    <td style="max-width: 200px">
+                                        <small>{{ producto.codigo }}</small>
+                                    </td>
                                     <td>
+                                        <small>{{ producto.marca.nombre }}</small>
+                                    </td>
+                                    <td>
+                                        <small>{{ producto.lugar.nombre }}</small>
+                                    </td>
+                                    <td>
+                                        <small>{{ producto.cantidad_disponible }}</small>
+                                    </td>
+                                    <td>
+                                        <small>{{ producto.medidas }}</small>
+                                    </td>
+                                    <td>
+                                        <small>{{ producto.precio_unitario }}</small>
+                                    </td>
+                                    <td style="max-width: 150px">
                                         <form class="d-flex gap-2 justify-content-center"
                                               action="{% url 'ventas-add-producto' producto.pk %}"
                                               method="post">{% csrf_token %}
@@ -64,7 +75,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-5">
                 <div class="border">
                     {% include 'ventas/carrito.html' %}
                 </div>

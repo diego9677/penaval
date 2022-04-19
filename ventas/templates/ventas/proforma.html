@@ -28,29 +28,53 @@
             <th colspan="6" class="text-center bg-light text-dark">Detalle</th>
         </tr>
         <tr class="text-center">
-            <th class="bg-light text-dark">Codigo</th>
-            <th class="bg-light text-dark">Marca</th>
-            <th class="bg-light text-dark">Medidas</th>
-            <th class="bg-light text-dark">Cantidad</th>
-            <th class="bg-light text-dark">Precio Unitario</th>
-            <th class="bg-light text-dark">Subtotal</th>
+            <th class="bg-light text-dark">
+                <small>Marca</small>
+            </th>
+            <th class="bg-light text-dark">
+                <small>Código</small>
+            </th>
+            <th class="bg-light text-dark">
+                <small>Medidas</small>
+            </th>
+            <th class="bg-light text-dark">
+                <small>Cantidad</small>
+            </th>
+            <th class="bg-light text-dark">
+                <small>Precio Unitario</small>
+            </th>
+            <th class="bg-light text-dark">
+                <small>Subtotal</small>
+            </th>
         </tr>
         </thead>
         <tbody>
         {% for detalle_proforma in proforma.detalle_proforma.all %}
             <tr class="text-center">
-                <td class="p-2">{{ detalle_proforma.producto.codigo }}</td>
-                <td class="p-2">{{ detalle_proforma.producto.marca }}</td>
-                <td class="p-2">{{ detalle_proforma.producto.medidas }}</td>
-                <td class="p-2">{{ detalle_proforma.cantidad }}</td>
-                <td class="p-2">{{ detalle_proforma.precio_unitario }} Bs.</td>
-                <td class="p-2">{{ detalle_proforma.subtotal }} Bs.</td>
+                <td>
+                    <small>{{ detalle_proforma.producto.marca }}</small>
+                </td>
+                <td>
+                    <small>{{ detalle_proforma.producto.codigo }}</small>
+                </td>
+                <td>
+                    <small>{{ detalle_proforma.producto.medidas }}</small>
+                </td>
+                <td>
+                    <small>{{ detalle_proforma.cantidad }}</small>
+                </td>
+                <td>
+                    <small>{{ detalle_proforma.precio_unitario }} Bs.</small>
+                </td>
+                <td>
+                    <small>{{ detalle_proforma.subtotal }} Bs.</small>
+                </td>
             </tr>
         {% endfor %}
         <tr>
-            <th scope="row" class="text-center bg-light text-dark">Total:</th>
+            <th scope="row" class="text-center bg-light text-dark"><small>Total:</small></th>
             <td colspan="4" class="bg-light text-dark"></td>
-            <td class="text-center bg-light text-dark">{{ total }} Bs.</td>
+            <td class="text-center bg-light text-dark"><small>{{ total }} Bs.</small></td>
         </tr>
         </tbody>
     </table>
