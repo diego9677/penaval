@@ -17,6 +17,23 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.views.generic import RedirectView
+from ninja import NinjaAPI, ModelSchema
+from productos.models import Producto
+from typing import List
+
+class ProductosOut(ModelSchema):
+    class Config:
+        model = Producto
+        model_fields = ['codigo', 'lugar', 'marca', 'cantidad_disponible', 'precio_unitario', 'medidas']
+
+api = NinjaAPI()
+
+
+@api.get("/products", response=List[ProductosOut])
+def add(request):
+    productos = Producto.objects.all()
+    return productos
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +41,7 @@ urlpatterns = [
     path('productos/', include('productos.urls')),
     path('ventas/', include('ventas.urls')),
     path('compras/', include('compras.urls')),
+    path("api/", api.urls),
     path('', RedirectView.as_view(pattern_name='producto-list'), name='index'),
 ]
 
