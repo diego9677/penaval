@@ -45,12 +45,12 @@ def get_all_products(request):
     qs = Producto.objects.all()
     return qs
 
-@api.get("/lugares", response=List[ProductosOut])
+@api.get("/lugares", response=List[LugarOut])
 def get_all_places(request):
     qs = Lugar.objects.all()
     return qs
 
-@api.get("/marcas", response=List[ProductosOut])
+@api.get("/marcas", response=List[MarcaOut])
 def get_all_brands(request):
     qs = Marca.objects.all()
     return qs
