@@ -18,21 +18,43 @@ from django.urls import path, include
 from django.conf import settings
 from django.views.generic import RedirectView
 from ninja import NinjaAPI, ModelSchema
-from productos.models import Producto
+from productos.models import Producto, Marca, Lugar
 from typing import List
 
 class ProductosOut(ModelSchema):
     class Config:
         model = Producto
-        model_fields = ['codigo', 'lugar', 'marca', 'cantidad_disponible', 'precio_unitario', 'medidas']
+        model_fields = ['id', 'codigo', 'lugar', 'marca', 'cantidad_disponible', 'precio_unitario', 'medidas']
+
+class MarcaOut(ModelSchema):
+    class Config:
+        model = Marca
+        model_fields = ['id', 'nombre', 'descripcion']
+
+
+class LugarOut(ModelSchema):
+    class Config:
+        model = Lugar
+        model_fields = ['id', 'nombre', 'descripcion']
+
 
 api = NinjaAPI()
 
+@api.get("/productos", response=List[ProductosOut])
+def get_all_products(request):
+    qs = Producto.objects.all()
+    return qs
 
-@api.get("/products", response=List[ProductosOut])
-def add(request):
-    productos = Producto.objects.all()
-    return productos
+@api.get("/lugares", response=List[ProductosOut])
+def get_all_places(request):
+    qs = Lugar.objects.all()
+    return qs
+
+@api.get("/marcas", response=List[ProductosOut])
+def get_all_brands(request):
+    qs = Marca.objects.all()
+    return qs
+
 
 
 urlpatterns = [
